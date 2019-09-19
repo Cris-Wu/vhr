@@ -4,9 +4,7 @@ import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +25,8 @@ public class UrlAccessDecisionManager implements AccessDecisionManager {
             String needRole = ca.getAttribute();
             if ("ROLE_LOGIN".equals(needRole)) {
                 if (auth instanceof AnonymousAuthenticationToken) {
-                    throw new BadCredentialsException("未登录");
+//                    throw new BadCredentialsException("未登录");
+                    return;
                 } else
                     return;
             }
